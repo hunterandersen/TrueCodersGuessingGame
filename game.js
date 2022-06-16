@@ -22,6 +22,7 @@ function initGame(){
     userPromptText.textContent = `Guess a number between ${guess.min} and ${guess.max}`;
     fireworksImage.hidden = true;
     isPlaying = true;
+    guessInput.hidden = false;
 }
 
 function handleInput(event){
@@ -54,6 +55,7 @@ function handleGuess(number){
 
 function victory(){
     isPlaying = false;
+    guessInput.hidden = true;
     fireworksImage.hidden = false;
     userPromptText.textContent = "You found the number! Congratulations!\n";
 }
