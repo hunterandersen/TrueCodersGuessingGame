@@ -1,9 +1,7 @@
 class GuessNumber{
     #numberToFind;
-    constructor(number){
-        this.#numberToFind = number || Math.floor(Math.random() * 100)+1;
-        //Helpful output for testing
-        console.log(`Number to find: ${this.#numberToFind}`);
+    constructor(number, max){
+        this.setGuess(number, max);
     }
 
     //takes a Number guess
@@ -23,9 +21,13 @@ class GuessNumber{
     }
 
     //create a new number to be found
-    setGuess(number){
-        this.#numberToFind = number || Math.floor(Math.random() * 100)+1;
-        console.log(`New number to find: ${this.#numberToFind}`);
+    setGuess(number, max){
+        if (!max){
+            this.#numberToFind = number || Math.floor(Math.random() * 100)+1;
+        }else{
+            this.#numberToFind = Math.floor(Math.random() * max)+number;
+        }
+        console.log(`Number to find: ${this.#numberToFind}`);
     }
 }
 
