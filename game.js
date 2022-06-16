@@ -5,8 +5,6 @@
 import GuessNumber from './GuessNumber.js'
 
 const guess = new GuessNumber();
-guess.setGuess(35);
-let isPlaying = true;
 
 const guessInput = document.querySelector("#guessInput");
 const fireworksImage = document.querySelector("#fireworksImage");
@@ -15,7 +13,9 @@ const restartButton = document.querySelector("#restartButton");
 
 restartButton.addEventListener('click', () => initGame());
 guessInput.addEventListener('keyup', (e) => handleInput(e));
+
 userPromptText.textContent = `Guess a number between ${guess.min} and ${guess.max}`;
+let isPlaying = true;
 
 function initGame(){
     guess.setGuess(1, 200);
