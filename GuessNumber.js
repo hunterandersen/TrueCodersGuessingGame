@@ -22,12 +22,22 @@ class GuessNumber{
 
     //create a new number to be found
     setGuess(number, max){
-        if (!max){
-            this.#numberToFind = number || Math.floor(Math.random() * 100)+1;
-        }else{
-            this.#numberToFind = Math.floor(Math.random() * max)+number;
+        if (max){
+            this.min = number;
+            this.max = max;
+        } else if (number){
+            this.max = (Math.floor(number/100)+1)*100;
+            this.min = 1;
+        } 
+        else{
+            this.min = 1;
+            this.max = 100;
         }
-        console.log(`Number to find: ${this.#numberToFind}`);
+        if (!max && number){
+            this.#numberToFind = number;
+        }else{
+            this.#numberToFind = Math.floor(Math.random() * this.max) + this.min;
+        }
     }
 }
 
