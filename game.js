@@ -2,14 +2,18 @@
 //holds the state of the number to guess
 //method to instantiate a new number to guess
 //method to check if a guess is correct
-import GuessNumber from './GuessNumber.js'
-
-const guess = new GuessNumber();
+import DisplayStopwatch from './UtilClasses/DisplayStopwatch.js';
+import GuessNumber from './UtilClasses/GuessNumber.js'
 
 const guessInput = document.querySelector("#guessInput");
 const fireworksImage = document.querySelector("#fireworksImage");
 const userPromptText = document.querySelector("#userPromptText");
 const restartButton = document.querySelector("#restartButton");
+const pastGuessesList = document.querySelector("#pastGuessesList");
+
+const guess = new GuessNumber();
+const displayStopWatch = new DisplayStopwatch(pastGuessesList, 0);
+let pastGuesses = [];
 
 restartButton.addEventListener('click', () => initGame());
 guessInput.addEventListener('keyup', (e) => handleInput(e));
@@ -23,6 +27,7 @@ function initGame(){
     fireworksImage.hidden = true;
     isPlaying = true;
     guessInput.hidden = false;
+    renderPastGuesses();
 }
 
 function handleInput(event){
@@ -39,23 +44,50 @@ function handleInput(event){
 
 function handleGuess(number){
     let guessResult = guess.checkGuess(number);
+    let textResult = "";
     switch(guessResult){
         case -1:
-            userPromptText.textContent = "Lower...";
+            textResult = "Lower";
             break;
         case 0:
-            userPromptText.textContent = "";
+            textResult = "Correct";
             victory();
             break;
         case 1:
-            userPromptText.textContent = "Higher...";
+            textResult = "Higher";
             break;
     }
+    //update the user prompt
+    userPromptText.textContent = `${textResult}${isPlaying? "...":"! Congratulations"}`;
+
+    //Add a new guess to the past guesses list
+    pastGuesses.push({
+        guessIndex:number,
+        text:textResult
+    });
+    if (isPlaying) renderPastGuesses();
+}
+
+function renderPastGuesses(){
+    //remove all the li elements
+    for (let item of Array.from(pastGuessesList.children)){
+        console.log(item);
+        if (item.tagName == "LI"){
+            item.remove();
+        }
+    }
+    for (let i = 0; i < pastGuesses.length; i++){
+        let newLi = document.createElement("li");
+        newLi.textContent = `${i+1}: ${pastGuesses[i].text} than ${pastGuesses[i].guessIndex}`;
+        pastGuessesList.appendChild(newLi);
+    }
+    
 }
 
 function victory(){
     isPlaying = false;
     guessInput.hidden = true;
     fireworksImage.hidden = false;
+    pastGuesses = [];
     userPromptText.textContent = "You found the number! Congratulations!\n";
 }

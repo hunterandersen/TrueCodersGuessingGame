@@ -1,7 +1,13 @@
 class GuessNumber{
     #numberToFind;
-    constructor(number, max){
-        this.setGuess(number, max);
+
+    /**
+     * 
+     * @param {Number} min "The hidden number to be guessed OR the minimum value in the guess range"
+     * @param {Number} max "Maximum value in the guess range"
+     */
+    constructor(min, max){
+        this.setGuess(min, max);
     }
 
     //takes a Number guess
