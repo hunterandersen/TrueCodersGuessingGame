@@ -1,5 +1,8 @@
 class GuessNumber{
     #numberToFind;
+    static LOWER = -1;
+    static HIGHER = 1;
+    static MATCH = 0;
 
     /**
      * 
@@ -18,11 +21,11 @@ class GuessNumber{
     checkGuess(attempt){
         if (!attempt && attempt != -1) return null;
         if (attempt < this.#numberToFind){
-            return 1;
+            return GuessNumber.HIGHER;
         }else if (attempt > this.#numberToFind){
-            return -1;
+            return GuessNumber.LOWER;
         }else{
-            return 0;
+            return GuessNumber.MATCH;
         }
     }
 
@@ -44,6 +47,11 @@ class GuessNumber{
         }else{
             this.#numberToFind = Math.floor(Math.random() * this.max) + this.min;
         }
+    }
+
+    //get the number
+    revealNumber(){
+        return this.#numberToFind;
     }
 }
 

@@ -1,6 +1,6 @@
 class DisplayStopwatch{
 
-    #currentTimeCount
+    #currentTimeCount = 0;
 
     /**
      * 
@@ -16,10 +16,12 @@ class DisplayStopwatch{
         this.clockDisplay.classList.add("stopwatch");
         parentElement.appendChild(this.clockDisplay);
         this.#currentTimeCount = startTime;
-        this.clockInterval = setInterval(()=>{
-            this.#currentTimeCount++;
-            this.paint();
-        }, 1000);
+        this.clockInterval = setInterval(()=>this.timer(), 1000);
+    }
+
+    timer(){
+        this.#currentTimeCount++;
+        this.paint();
     }
 
     getSeconds(){
@@ -32,6 +34,17 @@ class DisplayStopwatch{
 
     getHours(){
         return Math.floor(Math.floor(this.#currentTimeCount/60)/60);
+    }
+
+    togglePause(){
+        if (this.clockInterval){
+            clearInterval(this.clockInterval);
+            this.clockInterval = null;
+        }else{
+            this.#currentTimeCount = 0;
+            this.paint();
+            this.clockInterval = setInterval(()=>this.timer(), 1000);
+        }
     }
 
     paint(){

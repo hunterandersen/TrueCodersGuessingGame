@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guessing Game</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./game.js" defer></script>
-</head>
-<body>
-    <div class="flex-column">
+  </head>
+  <body>
+    <aside id="leftSide" class="flex-center">
+      <div id="probabilityArea">
+        <h2 id="probabilityPercentage"></h2>
+        <p id="probabilityText"></p>
+        <div id="pastGuessesArea">
+          <div class="flex-column">
+            <h3>Past Guesses</h3>
+            <ul id="pastGuessesList"></ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <div class="flex-column">
         <h1>Guessing Game</h1>
-        <p id="userPromptText">Pick a number</p>
-        <img id="fireworksImage" hidden="true" src="./images/colorful-fireworks.gif" alt="Victory Image">
-        <input id="guessInput" type="number" placeholder="Press Enter to submit">
+        <p id="userPromptText"></p>
+        <img
+          id="fireworksImage"
+          hidden="true"
+          src="./images/colorful-fireworks.gif"
+          alt="Victory Image"
+        />
+        <input
+          id="guessInput"
+          type="number"
+          placeholder="Press Enter to submit"
+        />
         <button id="restartButton">Play Again</button>
-    </div>
-    <div id="pastGuessesArea" class="flex-column">
-        <ul id="pastGuessesList">
-
-        </ul>
-    </div>
-</body>
+        <button id="giveUpButton">Give Up</button>
+      </div>
+    </main>
+    <aside id="rightSide" class="flex-center"></aside>
+  </body>
 </html>
